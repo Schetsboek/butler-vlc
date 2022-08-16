@@ -1,7 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { exec } from 'child_process';
 import { existsSync } from 'fs';
-import { firstValueFrom } from 'rxjs';
 import Config from './../config';
 
 @Injectable()
@@ -9,7 +8,7 @@ export class VlcService {
   constructor() {}
 
   public async stopAudio(): Promise<void> {
-    await firstValueFrom(exec('ps axf | grep /usr/bin/vlc | grep -v grep | awk \'{print "kill " $1}\' | sh'));
+    exec('ps axf | grep /usr/bin/vlc | grep -v grep | awk \'{print "kill " $1}\' | sh');
   }
 
   public async resumeAudio(): Promise<void> {

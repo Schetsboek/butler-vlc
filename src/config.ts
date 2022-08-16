@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: './.env' });
 
 export default {
   PORT: process.env.PORT || '3030',

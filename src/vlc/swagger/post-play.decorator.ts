@@ -1,9 +1,9 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 
-export function PostPlayAudio() {
+export function PostPlay() {
   return applyDecorators(
-    ApiOperation({ summary: 'Set audio file to be played'}),
+    ApiOperation({ summary: 'Play audio by sending it\'s name.'}),
     ApiOkResponse(),
     ApiBadRequestResponse(),
     ApiNotFoundResponse({ description: 'Audio file does not exist. Did you misspell it?' })

@@ -43,7 +43,7 @@ export class VlcService {
     }));
   }
 
-  public async playAudio(audioName: string): Promise<boolean> {
+  public async playAudio(audioName: string): Promise<void> {
     // Because exec is vulnerable to shell injections, it's tested here again.
     if (!new RegExp(/^[a-zA-Z_]+$/g).test(audioName)) {
       throw new BadRequestException('Does not conform to Regex: [a-zA-Z_]+');
@@ -52,6 +52,5 @@ export class VlcService {
       throw new NotFoundException('Audio file does not seem to exist.');
     }
     exec('cvlc -f --play-and-exit --novideo --one-instance ' + Config.MUSIC_FOLDER + '/' + audioName + '.mp3');
-    return true;
   }
 }

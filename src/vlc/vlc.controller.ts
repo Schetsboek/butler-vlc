@@ -13,7 +13,7 @@ export class VlcController {
 
   @Post('play')
   @PostPlay()
-  public async playAudio(@Body() dto: PlayAudioDto): Promise<boolean> {
+  public async playAudio(@Body() dto: PlayAudioDto): Promise<void> {
     return this.vlcService.playAudio(dto.audioName);
   }
 

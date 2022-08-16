@@ -7,6 +7,7 @@ import Config from './../config';
 
 @Injectable()
 export class VlcService {
+  private current_pid;
 
   constructor(private readonly httpService: HttpService) {}
 
@@ -52,6 +53,8 @@ export class VlcService {
     if (!existsSync(Config.MUSIC_FOLDER + '/' + audioName + '.mp3')) {
       throw new NotFoundException('Audio file does not seem to exist.');
     }
-    exec('/usr/bin/vlc -I dummy -f --play-and-exit --novideo --one-instance ' + Config.MUSIC_FOLDER + '/' + audioName + '.mp3');
+    const child = exec('/usr/bin/vlc -I dummy -f --play-and-exit --novideo --one-instance ' + Config.MUSIC_FOLDER + '/' + audioName + '.mp3');
+    console.log('child.pid', child.pid);
+    this.current_pid = child.pid;
   }
 }

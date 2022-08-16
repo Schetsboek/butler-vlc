@@ -17,12 +17,6 @@ export class VlcController {
     return this.vlcService.playAudio(dto.audioName);
   }
 
-  @Get('info')
-  @GetInfo()
-  public async getInfo(): Promise<object> {
-    return this.vlcService.getInfo();
-  }
-
   @Post('stop')
   @PostStop()
   public async stopAudio(): Promise<void> {

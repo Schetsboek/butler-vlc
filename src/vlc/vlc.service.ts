@@ -52,6 +52,6 @@ export class VlcService {
     if (!existsSync(Config.MUSIC_FOLDER + '/' + audioName + '.mp3')) {
       throw new NotFoundException('Audio file does not seem to exist.');
     }
-    exec('cvlc -f --play-and-exit --novideo --one-instance ' + Config.MUSIC_FOLDER + '/' + audioName + '.mp3');
+    exec('/usr/bin/vlc -I dummy -f --play-and-exit --novideo --one-instance ' + Config.MUSIC_FOLDER + '/' + audioName + '.mp3');
   }
 }

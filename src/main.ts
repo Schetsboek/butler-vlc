@@ -11,7 +11,7 @@ async function bootstrap() {
   const vlcLogger = new Logger('VLC instance');
   // Exec a shell command for a single VLC instance, which closes itself when the server shuts down.
   // VLC_PASSWORD is vulnerable for shell injection.
-  exec('cvlc -I http --one-instance --http-password ' + Config.VLC_PASSWORD);
+  exec('/usr/bin/vlc -I dummy -I http --one-instance --http-password ' + Config.VLC_PASSWORD);
   vlcLogger.log('Initializing VLC service');
 
   app.useGlobalPipes(new ValidationPipe({

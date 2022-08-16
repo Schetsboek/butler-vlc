@@ -44,6 +44,7 @@ export class VlcService {
   }
 
   public async playAudio(audioName: string): Promise<void> {
+    console.log('playAudio', 'Request to play ' + Config.MUSIC_FOLDER + '/' + audioName)
     // Because exec is vulnerable to shell injections, it's tested here again.
     if (!new RegExp(/^[a-zA-Z_]+$/g).test(audioName)) {
       throw new BadRequestException('Does not conform to Regex: [a-zA-Z_]+');

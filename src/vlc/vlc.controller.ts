@@ -14,7 +14,7 @@ export class VlcController {
   @Post('play')
   @PostPlay()
   public async playAudio(@Body() dto: PlayAudioDto): Promise<void> {
-    return this.vlcService.playAudio(dto.audioName);
+    return this.vlcService.playAudio(dto.audioName, dto.repeat);
   }
 
   @Post('stop')

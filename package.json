@@ -1,8 +1,8 @@
 {
   "name": "butler-vlc",
-  "version": "1.0",
-  "description": "",
-  "author": "",
+  "version": "1.1",
+  "description": "Local HTTP API to play VLC audio files",
+  "author": "Jeroen Schets",
   "private": true,
   "license": "GPL-3.0",
   "scripts": {

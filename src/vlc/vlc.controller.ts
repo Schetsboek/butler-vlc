@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PlayAudioDto } from './dto/play-audio.dto';
-import { GetInfo } from './swagger/get-info.decorator';
 import { PostPause } from './swagger/post-pause.decorator';
 import { PostPlay } from './swagger/post-play.decorator';
 import { PostResume } from './swagger/post-resume.decorator';

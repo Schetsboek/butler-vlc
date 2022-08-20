@@ -40,9 +40,6 @@ export class VlcService {
     if (!new RegExp(/^[a-zA-Z_]+$/g).test(audioFolder)) {
       throw new BadRequestException('Does not conform to Regex: [a-zA-Z_]+');
     }
-    if (!existsSync(Config.MUSIC_FOLDER + '/' + audioFolder)) {
-      throw new NotFoundException('Audio file does not seem to exist.');
-    }
     await this.stopAudio();
     exec('/usr/bin/vlc -I dummy -L -Z --novideo ' + Config.MUSIC_FOLDER + '/' + audioFolder);
   }

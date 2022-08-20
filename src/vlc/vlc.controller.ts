@@ -17,6 +17,11 @@ export class VlcController {
     return this.vlcService.playAudio(dto.audioName, dto.repeat);
   }
 
+  @Post('play-folder')
+  public async playAudioFolder(@Body() dto: PlayAudioDto): Promise<void> {
+    return this.vlcService.playAudioFolder(dto.audioName);
+  }
+
   @Post('stop')
   @PostStop()
   public async stopAudio(): Promise<void> {

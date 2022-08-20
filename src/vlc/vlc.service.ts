@@ -35,7 +35,7 @@ export class VlcService {
     exec('/usr/bin/vlc -I dummy -f ' + repeatSetting + ' --novideo ' + Config.MUSIC_FOLDER + '/' + audioName + '.mp3');
   }
 
-  public async playAudioFolder(audioFolder: string, repeat?: boolean): Promise<void> {
+  public async playAudioFolder(audioFolder: string): Promise<void> {
     // Because exec is vulnerable to shell injections, it's tested here again.
     if (!new RegExp(/^[a-zA-Z_]+$/g).test(audioFolder)) {
       throw new BadRequestException('Does not conform to Regex: [a-zA-Z_]+');

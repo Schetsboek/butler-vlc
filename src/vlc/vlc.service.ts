@@ -20,7 +20,13 @@ export class VlcService {
   }
 
   public async playAudio(audioName: string, repeat?: boolean): Promise<void> {
-    this.checkAudio(audioName);
+    // Because exec is vulnerable to shell injections, it's tested here again.
+    if (!new RegExp(/^[a-zA-Z_]+$/g).test(audioName)) {
+      throw new BadRequestException('Does not conform to Regex: [a-zA-Z_]+');
+    }
+    if (!existsSync(Config.MUSIC_FOLDER + '/' + audioName + '.mp3')) {
+      throw new NotFoundException('Audio file does not seem to exist.');
+    }
     await this.stopAudio();
     let repeatSetting = '--play-and-exit';
     if (repeat) {
@@ -29,13 +35,15 @@ export class VlcService {
     exec('/usr/bin/vlc -I dummy -f ' + repeatSetting + ' --novideo ' + Config.MUSIC_FOLDER + '/' + audioName + '.mp3');
   }
 
-  private checkAudio(audioName: string): void {
+  public async playAudioFolder(audioFolder: string, repeat?: boolean): Promise<void> {
     // Because exec is vulnerable to shell injections, it's tested here again.
-    if (!new RegExp(/^[a-zA-Z_]+$/g).test(audioName)) {
+    if (!new RegExp(/^[a-zA-Z_]+$/g).test(audioFolder)) {
       throw new BadRequestException('Does not conform to Regex: [a-zA-Z_]+');
     }
-    if (!existsSync(Config.MUSIC_FOLDER + '/' + audioName + '.mp3')) {
+    if (!existsSync(Config.MUSIC_FOLDER + '/' + audioFolder)) {
       throw new NotFoundException('Audio file does not seem to exist.');
     }
+    await this.stopAudio();
+    exec('/usr/bin/vlc -I dummy -L -Z --novideo ' + Config.MUSIC_FOLDER + '/' + audioFolder);
   }
 }
